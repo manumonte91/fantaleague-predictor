@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="GrailsApplication4 dev" uuid="54fa5c78-a20e-4cec-867d-6dc0a6d51595">
+    <database-info product="MySQL" version="5.5.46" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="flp_svi"/>
+    <table name="c_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cod_comp" sqlType="VARCHAR" precision="1" scale="0" nullable="false" jdbcType="12"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="formato_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="sigla_nazione" sqlType="VARCHAR" precision="2" scale="0" nullable="false" jdbcType="12"/>
+      <column name="squadre" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="tipo_comp_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKF3B595E8D5FB7EFF" columns="formato_id" ref-table="formato_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKF3B595E8ED42AD27" columns="tipo_comp_id" ref-table="c_tipo_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKB0F56A3E546097C1" table="fase_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FKD43F7CB2546097C1" table="giocatore_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FKF4466D3C546097C1" table="sessione_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FKD9F083C7546097C1" table="stagione_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <index name="FKF3B595E8D5FB7EFF" unique="false" columns="formato_id"/>
+      <index name="FKF3B595E8ED42AD27" unique="false" columns="tipo_comp_id"/>
+    </table>
+    <table name="c_tipo_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKF3B595E8ED42AD27" table="c_competizione" schema="" catalog="flp_svi" columns="tipo_comp_id"/>
+    </table>
+    <table name="commento" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_inserimento" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="post_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="testo" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKDC17DDF07631FCCF" columns="user_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKDC17DDF0C6B50641" columns="post_id" ref-table="post" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK246262D5D524E0E4" table="commento_like_table" schema="" catalog="flp_svi" columns="commento_likes_id"/>
+      <exported-key name="FK4530F998D219A8C1" table="like_commento" schema="" catalog="flp_svi" columns="commento_id"/>
+      <index name="FKDC17DDF07631FCCF" unique="false" columns="user_id"/>
+      <index name="FKDC17DDF0C6B50641" unique="false" columns="post_id"/>
+    </table>
+    <table name="commento_like_table" schema="" catalog="flp_svi" type="TABLE">
+      <column name="commento_likes_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="like_post_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="like_utente_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <foreign-key name="FK246262D56E29CD09" columns="like_post_id,like_utente_id" ref-table="like_table" ref-schema="" ref-catalog="flp_svi" ref-columns="post_id,utente_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK246262D5D524E0E4" columns="commento_likes_id" ref-table="commento" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK246262D56E29CD09" unique="false" columns="like_post_id,like_utente_id"/>
+      <index name="FK246262D5D524E0E4" unique="false" columns="commento_likes_id"/>
+    </table>
+    <table name="fase_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKB0F56A3E546097C1" columns="competizione_id" ref-table="c_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK89146B195F5D34CD" table="turno_competizione" schema="" catalog="flp_svi" columns="fase_id"/>
+      <index name="FKB0F56A3E546097C1" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="formato_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKF3B595E8D5FB7EFF" table="c_competizione" schema="" catalog="flp_svi" columns="formato_id"/>
+    </table>
+    <table name="giocatore" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="colore_sociale1" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="colore_sociale2" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="colore_sociale3" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="fanta_league" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="tipo_colori_sociali_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="utente_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKE134D95913C09827" columns="tipo_colori_sociali_id" ref-table="tipo_colori_sociali" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKE134D959F56295E1" columns="utente_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKD43F7CB242AAF3" table="giocatore_competizione" schema="" catalog="flp_svi" columns="giocatore_id"/>
+      <exported-key name="FKD3546227BB668DC" table="partita_pronostico" schema="" catalog="flp_svi" columns="trasferta_id"/>
+      <exported-key name="FKD3546229C395440" table="partita_pronostico" schema="" catalog="flp_svi" columns="casa_id"/>
+      <exported-key name="FK76717DA942AAF3" table="sessione_giocatore" schema="" catalog="flp_svi" columns="giocatore_id"/>
+      <index name="fanta_league" unique="true" columns="fanta_league"/>
+      <index name="FKE134D95913C09827" unique="false" columns="tipo_colori_sociali_id"/>
+      <index name="FKE134D959F56295E1" unique="false" columns="utente_id"/>
+    </table>
+    <table name="giocatore_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="differenza_punti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="giocatore_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="pareggi" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="presenze" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_esiti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_nulli" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_risultati" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="punti_fatti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="punti_subiti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sconfitte" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="vittorie" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKD43F7CB242AAF3" columns="giocatore_id" ref-table="giocatore" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD43F7CB2546097C1" columns="competizione_id" ref-table="c_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKD43F7CB242AAF3" unique="false" columns="giocatore_id"/>
+      <index name="FKD43F7CB2546097C1" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="giornata" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK41EB3B25BCCD5305" columns="competizione_id" ref-table="stagione_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKD0BCCBC3C798A0A1" table="partita" schema="" catalog="flp_svi" columns="giornata_id"/>
+      <index name="FK41EB3B25BCCD5305" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="giornata_pronostico" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKABFCC5804A09E6F0" columns="competizione_id" ref-table="sessione_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKD354622A6E2D9E7" table="partita_pronostico" schema="" catalog="flp_svi" columns="giornata_id"/>
+      <exported-key name="FK99D7B50AF6166DAC" table="sessione_turno_competizione_giornata_pronostico" schema="" catalog="flp_svi" columns="giornata_pronostico_id"/>
+      <index name="FKABFCC5804A09E6F0" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="like_commento" schema="" catalog="flp_svi" type="TABLE">
+      <column name="commento_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="utente_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="commento_id,utente_id"/>
+      <foreign-key name="FK4530F998D219A8C1" columns="commento_id" ref-table="commento" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK4530F998F56295E1" columns="utente_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK4530F998D219A8C1" unique="false" columns="commento_id"/>
+      <index name="FK4530F998F56295E1" unique="false" columns="utente_id"/>
+    </table>
+    <table name="like_table" schema="" catalog="flp_svi" type="TABLE">
+      <column name="post_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="utente_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="post_id,utente_id"/>
+      <foreign-key name="FKD1AD0126C6B50641" columns="post_id" ref-table="post" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD1AD0126F56295E1" columns="utente_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK246262D56E29CD09" table="commento_like_table" schema="" catalog="flp_svi" columns="like_post_id,like_utente_id"/>
+      <index name="FKD1AD0126C6B50641" unique="false" columns="post_id"/>
+      <index name="FKD1AD0126F56295E1" unique="false" columns="utente_id"/>
+    </table>
+    <table name="nazione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="nome" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sigla" sqlType="VARCHAR" precision="3" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK8ADE97E930AEED" table="squadra" schema="" catalog="flp_svi" columns="nazionalita_id"/>
+      <index name="sigla" unique="true" columns="sigla"/>
+    </table>
+    <table name="notifica" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_read" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK5E7EB9577631FCCF" columns="user_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK5E7EB9577631FCCF" unique="false" columns="user_id"/>
+    </table>
+    <table name="oauthid" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="access_token" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="profile_name" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="profile_url" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="provider" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK9C00D1F27631FCCF" columns="user_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="access_token" unique="true" columns="access_token"/>
+      <index name="FK9C00D1F27631FCCF" unique="false" columns="user_id"/>
+      <index name="identity_idx" unique="false" columns="access_token,provider"/>
+    </table>
+    <table name="partita" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="casa_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_partita" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="giornata_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="gol_casa" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="gol_trasferta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="trasferta_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKD0BCCBC312EC3510" columns="casa_id" ref-table="squadra" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD0BCCBC3C798A0A1" columns="giornata_id" ref-table="giornata" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD0BCCBC3F26949AC" columns="trasferta_id" ref-table="squadra" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK701FA4263A1EBCF3" table="pronostico" schema="" catalog="flp_svi" columns="partita_id"/>
+      <index name="FKD0BCCBC312EC3510" unique="false" columns="casa_id"/>
+      <index name="FKD0BCCBC3C798A0A1" unique="false" columns="giornata_id"/>
+      <index name="FKD0BCCBC3F26949AC" unique="false" columns="trasferta_id"/>
+    </table>
+    <table name="partita_pronostico" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="casa_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_partita" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="giornata_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="punti_casa" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="punti_trasferta" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="trasferta_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKD3546227BB668DC" columns="trasferta_id" ref-table="giocatore" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD3546229C395440" columns="casa_id" ref-table="giocatore" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD354622A6E2D9E7" columns="giornata_id" ref-table="giornata_pronostico" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK701FA426E7110F7A" table="pronostico" schema="" catalog="flp_svi" columns="partita_pronostico_id"/>
+      <index name="FKD3546227BB668DC" unique="false" columns="trasferta_id"/>
+      <index name="FKD3546229C395440" unique="false" columns="casa_id"/>
+      <index name="FKD354622A6E2D9E7" unique="false" columns="giornata_id"/>
+    </table>
+    <table name="post" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_inserimento" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="testo" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="tipo_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="user_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK3498A07631FCCF" columns="user_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK3498A0B449C501" columns="tipo_id" ref-table="tipo_post" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKDC17DDF0C6B50641" table="commento" schema="" catalog="flp_svi" columns="post_id"/>
+      <exported-key name="FKD1AD0126C6B50641" table="like_table" schema="" catalog="flp_svi" columns="post_id"/>
+      <index name="FK3498A07631FCCF" unique="false" columns="user_id"/>
+      <index name="FK3498A0B449C501" unique="false" columns="tipo_id"/>
+    </table>
+    <table name="pronostico" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="gol_casa" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="gol_trasferta" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="partita_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="partita_pronostico_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="punteggio" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK701FA4263A1EBCF3" columns="partita_id" ref-table="partita" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK701FA426E7110F7A" columns="partita_pronostico_id" ref-table="partita_pronostico" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK701FA4263A1EBCF3" unique="false" columns="partita_id"/>
+      <index name="FK701FA426E7110F7A" unique="false" columns="partita_pronostico_id"/>
+    </table>
+    <table name="ruolo" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="authority" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKABAA554915F55BB3" table="utente_ruolo" schema="" catalog="flp_svi" columns="ruolo_id"/>
+      <index name="authority" unique="true" columns="authority"/>
+    </table>
+    <table name="sessione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stagione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK53BFD08FCA118C41" columns="stagione_id" ref-table="stagione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKF4466D3CCB04B061" table="sessione_competizione" schema="" catalog="flp_svi" columns="sessione_id"/>
+      <index name="FK53BFD08FCA118C41" unique="false" columns="stagione_id"/>
+    </table>
+    <table name="sessione_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="codice" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_fine" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="data_inizio" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="sessione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="stato_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKF4466D3C546097C1" columns="competizione_id" ref-table="c_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKF4466D3CCB04B061" columns="sessione_id" ref-table="sessione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKF4466D3CCE6F59DF" columns="stato_id" ref-table="stato_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKABFCC5804A09E6F0" table="giornata_pronostico" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FK76B0BE8E4A09E6F0" table="sessione_fase_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FK76717DA94A09E6F0" table="sessione_giocatore" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <index name="codice" unique="true" columns="codice"/>
+      <index name="FKF4466D3C546097C1" unique="false" columns="competizione_id"/>
+      <index name="FKF4466D3CCB04B061" unique="false" columns="sessione_id"/>
+      <index name="FKF4466D3CCE6F59DF" unique="false" columns="stato_id"/>
+    </table>
+    <table name="sessione_fase_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK76B0BE8E4A09E6F0" columns="competizione_id" ref-table="sessione_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK7AC3A0C9B45D547C" table="sessione_turno_competizione" schema="" catalog="flp_svi" columns="fase_id"/>
+      <index name="FK76B0BE8E4A09E6F0" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="sessione_giocatore" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="bidoni" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="differenza_punti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="giocatore_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="media_punti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="mop" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pareggi" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="presenze" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_esiti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_nulli" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pronostici_risultati" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="punti_fatti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="punti_subiti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="riepilogo" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="sconfitte" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="vittorie" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK76717DA942AAF3" columns="giocatore_id" ref-table="giocatore" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK76717DA94A09E6F0" columns="competizione_id" ref-table="sessione_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK5D1574DF69A97BD4" table="sessione_turno_competizione_sessione_giocatore" schema="" catalog="flp_svi" columns="sessione_giocatore_id"/>
+      <index name="FK76717DA942AAF3" unique="false" columns="giocatore_id"/>
+      <index name="FK76717DA94A09E6F0" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="sessione_turno_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="andata_ritorno" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fase_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="sorteggio" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="tipo_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK7AC3A0C9B45D547C" columns="fase_id" ref-table="sessione_fase_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK7AC3A0C9E9B6CFC9" columns="tipo_id" ref-table="tipo_turno_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK99D7B50A28B2B0C3" table="sessione_turno_competizione_giornata_pronostico" schema="" catalog="flp_svi" columns="sessione_turno_competizione_giornate_id"/>
+      <exported-key name="FK5D1574DF76F43B" table="sessione_turno_competizione_sessione_giocatore" schema="" catalog="flp_svi" columns="sessione_turno_competizione_giocatori_id"/>
+      <index name="FK7AC3A0C9B45D547C" unique="false" columns="fase_id"/>
+      <index name="FK7AC3A0C9E9B6CFC9" unique="false" columns="tipo_id"/>
+    </table>
+    <table name="sessione_turno_competizione_giornata_pronostico" schema="" catalog="flp_svi" type="TABLE">
+      <column name="sessione_turno_competizione_giornate_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="giornata_pronostico_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <foreign-key name="FK99D7B50A28B2B0C3" columns="sessione_turno_competizione_giornate_id" ref-table="sessione_turno_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK99D7B50AF6166DAC" columns="giornata_pronostico_id" ref-table="giornata_pronostico" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK99D7B50A28B2B0C3" unique="false" columns="sessione_turno_competizione_giornate_id"/>
+      <index name="FK99D7B50AF6166DAC" unique="false" columns="giornata_pronostico_id"/>
+    </table>
+    <table name="sessione_turno_competizione_sessione_giocatore" schema="" catalog="flp_svi" type="TABLE">
+      <column name="sessione_turno_competizione_giocatori_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="sessione_giocatore_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <foreign-key name="FK5D1574DF69A97BD4" columns="sessione_giocatore_id" ref-table="sessione_giocatore" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK5D1574DF76F43B" columns="sessione_turno_competizione_giocatori_id" ref-table="sessione_turno_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK5D1574DF69A97BD4" unique="false" columns="sessione_giocatore_id"/>
+      <index name="FK5D1574DF76F43B" unique="false" columns="sessione_turno_competizione_giocatori_id"/>
+    </table>
+    <table name="squadra" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="nazionalita_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="nome" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sigla" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK8ADE97E930AEED" columns="nazionalita_id" ref-table="nazione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FKD0BCCBC312EC3510" table="partita" schema="" catalog="flp_svi" columns="casa_id"/>
+      <exported-key name="FKD0BCCBC3F26949AC" table="partita" schema="" catalog="flp_svi" columns="trasferta_id"/>
+      <exported-key name="FK8D9BE822574C8333" table="squadra_competizione" schema="" catalog="flp_svi" columns="squadra_id"/>
+      <index name="nome" unique="true" columns="nome"/>
+      <index name="FK8ADE97E930AEED" unique="false" columns="nazionalita_id"/>
+    </table>
+    <table name="squadra_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="differenza_reti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="gol_fatti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="gol_subiti" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="pareggi" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="presenze" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="sconfitte" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="squadra_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="vittorie" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK8D9BE822574C8333" columns="squadra_id" ref-table="squadra" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK8D9BE822BCCD5305" columns="competizione_id" ref-table="stagione_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK8D9BE822574C8333" unique="false" columns="squadra_id"/>
+      <index name="FK8D9BE822BCCD5305" unique="false" columns="competizione_id"/>
+    </table>
+    <table name="stagione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_fine" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="data_inizio" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="stato_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK4DDCF4248EBFC477" columns="stato_id" ref-table="stato_stagione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK53BFD08FCA118C41" table="sessione" schema="" catalog="flp_svi" columns="stagione_id"/>
+      <exported-key name="FKD9F083C7CA118C41" table="stagione_competizione" schema="" catalog="flp_svi" columns="stagione_id"/>
+      <index name="descrizione" unique="true" columns="descrizione"/>
+      <index name="FK4DDCF4248EBFC477" unique="false" columns="stato_id"/>
+    </table>
+    <table name="stagione_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="competizione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="data_fine" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="data_inizio" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="stagione_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FKD9F083C7546097C1" columns="competizione_id" ref-table="c_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKD9F083C7CA118C41" columns="stagione_id" ref-table="stagione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK41EB3B25BCCD5305" table="giornata" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <exported-key name="FK8D9BE822BCCD5305" table="squadra_competizione" schema="" catalog="flp_svi" columns="competizione_id"/>
+      <index name="FKD9F083C7546097C1" unique="false" columns="competizione_id"/>
+      <index name="FKD9F083C7CA118C41" unique="false" columns="stagione_id"/>
+    </table>
+    <table name="stato_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKF4466D3CCE6F59DF" table="sessione_competizione" schema="" catalog="flp_svi" columns="stato_id"/>
+    </table>
+    <table name="stato_stagione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK4DDCF4248EBFC477" table="stagione" schema="" catalog="flp_svi" columns="stato_id"/>
+    </table>
+    <table name="tipo_colori_sociali" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKE134D95913C09827" table="giocatore" schema="" catalog="flp_svi" columns="tipo_colori_sociali_id"/>
+    </table>
+    <table name="tipo_post" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK3498A0B449C501" table="post" schema="" catalog="flp_svi" columns="tipo_id"/>
+    </table>
+    <table name="tipo_turno_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK7AC3A0C9E9B6CFC9" table="sessione_turno_competizione" schema="" catalog="flp_svi" columns="tipo_id"/>
+      <exported-key name="FK89146B19E9B6CFC9" table="turno_competizione" schema="" catalog="flp_svi" columns="tipo_id"/>
+    </table>
+    <table name="turno_competizione" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="andata_ritorno" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="descrizione" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fase_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="sorteggio" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="tipo_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK89146B195F5D34CD" columns="fase_id" ref-table="fase_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK89146B19E9B6CFC9" columns="tipo_id" ref-table="tipo_turno_competizione" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK89146B195F5D34CD" unique="false" columns="fase_id"/>
+      <index name="FK89146B19E9B6CFC9" unique="false" columns="tipo_id"/>
+    </table>
+    <table name="utente" schema="" catalog="flp_svi" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="version" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="account_expired" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="account_locked" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="avatar" sqlType="BLOB" precision="65535" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="avatar_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="avatar_url" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="birthday" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="cognome" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email_enabled" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="enabled" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="gender" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nome" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password_expired" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FKDC17DDF07631FCCF" table="commento" schema="" catalog="flp_svi" columns="user_id"/>
+      <exported-key name="FKE134D959F56295E1" table="giocatore" schema="" catalog="flp_svi" columns="utente_id"/>
+      <exported-key name="FK4530F998F56295E1" table="like_commento" schema="" catalog="flp_svi" columns="utente_id"/>
+      <exported-key name="FKD1AD0126F56295E1" table="like_table" schema="" catalog="flp_svi" columns="utente_id"/>
+      <exported-key name="FK5E7EB9577631FCCF" table="notifica" schema="" catalog="flp_svi" columns="user_id"/>
+      <exported-key name="FK9C00D1F27631FCCF" table="oauthid" schema="" catalog="flp_svi" columns="user_id"/>
+      <exported-key name="FK3498A07631FCCF" table="post" schema="" catalog="flp_svi" columns="user_id"/>
+      <exported-key name="FKABAA5549F56295E1" table="utente_ruolo" schema="" catalog="flp_svi" columns="utente_id"/>
+      <index name="email" unique="true" columns="email"/>
+      <index name="username" unique="true" columns="username"/>
+    </table>
+    <table name="utente_ruolo" schema="" catalog="flp_svi" type="TABLE">
+      <column name="ruolo_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="utente_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="ruolo_id,utente_id"/>
+      <foreign-key name="FKABAA554915F55BB3" columns="ruolo_id" ref-table="ruolo" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FKABAA5549F56295E1" columns="utente_id" ref-table="utente" ref-schema="" ref-catalog="flp_svi" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FKABAA554915F55BB3" unique="false" columns="ruolo_id"/>
+      <index name="FKABAA5549F56295E1" unique="false" columns="utente_id"/>
+    </table>
+  </data-source>
+</component>
