@@ -128,8 +128,8 @@ oauth {
       api = FacebookApi
       key = '133010033523978'
       secret = '006bd732ea3bb6bbdfdeab6bf9caabc2'
-      scope = 'email,read_stream,publish_actions,user_birthday,publish_stream'
-      callback = "http://localhost:8080/GrailsApplication4/oauth/facebook/callback"   //callback to oauth controller of oauth plugin
+      scope = 'email,read_stream,publish_actions,user_birthday'
+      callback = "http://localhost:8080/fantaleague-predictor/oauth/facebook/callback"   //callback to oauth controller of oauth plugin
       successUri = "/login/facebookSuccess"
       failureUri = "/login/facebookFailure"
       display = "popup"

@@ -108,11 +108,11 @@
                     $(".infoMessage").fadeOut({duration: 5000});
                     $(".errorMessage").fadeOut({duration: 5000});
                 });
-	<!--
+
 	(function() {
 		document.forms['loginForm'].elements['j_username'].focus();
 	})();
-	// -->
+
 </script>
 </body>
 </html>

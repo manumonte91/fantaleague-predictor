@@ -124,6 +124,6 @@ class LoginController {
     def facebookFailure() {
         log.info "LOGIN FAILED WITH FACEBOOK"
         flash.error = "Login Facebook fallita"
-        redirect action: index
+        redirect view: index()
     }
 }

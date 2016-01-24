@@ -15,8 +15,10 @@ class AuthFilters {
             before = {
                 if (!session.user && 
                     (controllerName && !controllerName.equals('login'))) {
-                    redirect(controller: 'login', action: 'index')
-                    return false
+                    if (!controllerName.equals('oauth')) {
+                        redirect(controller: 'login', action: 'index')
+                        return false
+                    }
                 }
             }
         }

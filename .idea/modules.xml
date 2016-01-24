@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GrailsApplication4.iml" filepath="$PROJECT_DIR$/GrailsApplication4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GrailsApplication4-grailsPlugins.iml" filepath="$PROJECT_DIR$/GrailsApplication4-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fantaleague-predictor.iml" filepath="$PROJECT_DIR$/fantaleague-predictor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" filepath="$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" />
     </modules>
   </component>
 </project>

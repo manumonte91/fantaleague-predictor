@@ -92,9 +92,9 @@ $(document).ready(function () {
 			color:#C00;
 		}
 		#nav li li:hover {
-			-webkit-transform: translate(+10px,0);
+			-webkit-transform: translate(10px,0);
 			}
-	/
+
 		#nav a.selected {
 			color:#C00;
 		}
