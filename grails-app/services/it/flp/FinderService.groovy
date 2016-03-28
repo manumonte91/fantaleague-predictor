@@ -137,4 +137,22 @@ class FinderService {
     def findFriendship = { params ->
         
     }
+
+    def searchByNameOrSurname (String nome, String cognome) {
+        Utente.createCriteria().list(offset: 0, max: 1000) {
+            or {
+                ilike("nome", "%" + nome + "%")
+                ilike("cognome", "%" + cognome + "%")
+            }
+        }
+    }
+
+    def searchByNameAndSurname (String nome, String cognome) {
+        Utente.createCriteria().list(offset: 0, max: 1000) {
+            and {
+                ilike("nome", "%" + nome + "%")
+                ilike("cognome", "%" + cognome + "%")
+            }
+        }
+    }
 }

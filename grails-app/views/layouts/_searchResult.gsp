@@ -1,5 +1,5 @@
 <g:if test="${resultSearch}">
-    <ul id="searchResult" ${resultSearch.size > 10 ? "style=overflow-y:scroll;height:450px" : ""}>
+    <ul id="searchResult" ${resultSearch.size() > 10 ? "style=overflow-y:scroll;height:450px" : ""}>
         <g:each in="${resultSearch}" var="item" status="i">
             <g:if test="${i != 0}"><hr/></g:if>
             <a href='${createLink(controller:"profile",action:"view",id:item.id)}'>

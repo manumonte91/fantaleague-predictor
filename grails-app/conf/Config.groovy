@@ -159,10 +159,13 @@ grails.plugin.springsecurity.oauth.domainClass = 'it.flp.OAuthID'
 
 grails {
     mail {
-        host = "37.9.233.74"
-        port = "25"        
-        'default' {
-            from = "no-reply@cedacri.it"
-        }
+        host = "smtp.gmail.com"
+        port = 465
+        username = "fantaleaguepredictorgame@gmail.com"
+        password = "itsjustagame"
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"465",
+                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                 "mail.smtp.socketFactory.fallback":"false"]
     }
 }
