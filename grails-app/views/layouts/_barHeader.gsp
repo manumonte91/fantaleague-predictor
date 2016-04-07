@@ -76,7 +76,7 @@
         if (_timer)
             window.clearTimeout(_timer);
         _timer = window.setTimeout(function() {
-            ${remoteFunction(controller:'base', action: 'searchable',
+            ${remoteFunction(controller:'base', action: 'search',
                update: [success: 'resultSearch'], onSuccess:'modelFlagFromSearchResult(data)', /*options: [asynchronous: false], */
                params: '\'query=\' + value')};
         }, 500);

@@ -5,7 +5,7 @@
         <table>
             <tr>
                 <td>
-                    <div class="avatar_logo"></div>
+                    <g:img dir="images" file="clubs/${squadra.nome}.png" class="avatar_logo" />
                 </td>
                 <td>
                     <p>

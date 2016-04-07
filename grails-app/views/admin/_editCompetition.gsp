@@ -4,7 +4,7 @@
         <table>
             <tr>
                 <td>
-                    <g:img dir="images" file="${competizione.descrizione.replace(" ", "_")}.png" class="avatar_logo" />
+                    <g:img dir="images" file="leagues/${competizione.descrizione.replace(" ", "_")}.png" class="avatar_logo" />
                 </td>
                 <td>
                     <p>

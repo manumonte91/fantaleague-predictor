@@ -1,12 +1,12 @@
 package it.flp
 
 class BaseController {
-
-    def searchableService
     
     static String controller = "base"
-    static String actList = "searchable"
+    static String actList = "search"
     static defaultAction = "index"
+
+    def finderService
     
     def index() {
         if(!session.user)
@@ -17,17 +17,21 @@ class BaseController {
                  id: params.id
     }
     
-    def searchable = {
-        log.info("SEARCHABLE - PARAMS: ${params}")
-        def query = params["query"]
+    def search = {
+        log.info("SEARCH - PARAMS: ${params}")
+        String query = params["query"]
         if(query){
-            def srchResults = searchableService.search(query, ["offset": 0, "max": 1000])
+            def srchResults
+            if (query.split(' ').size() > 1)
+                srchResults = finderService.searchByNameAndSurname(query.split(' ')[0], query.split(' ')[1])
+            else
+                srchResults = finderService.searchByNameOrSurname(query, query)
 
-            log.info("QUERY SEARCHABLE - LIST: ${srchResults.results}")
-            log.info("QUERY SEARCHABLE - SIZE: ${srchResults.total}")
+            log.info("QUERY SEARCHABLE - LIST: ${srchResults}")
+            log.info("QUERY SEARCHABLE - SIZE: ${srchResults.size()}")
             
-            if (srchResults.total > 0)
-                render(template:"/layouts/searchResult", model:[resultSearch:srchResults.results])
+            if (srchResults.size() > 0)
+                render(template:"/layouts/searchResult", model:[resultSearch:srchResults])
             else
                 render(template:"/layouts/searchResult", model:[searchEmptyText:"Nessun risultato trovato"])
         }else{
