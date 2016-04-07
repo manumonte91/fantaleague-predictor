@@ -13,9 +13,8 @@ class AuthFilters {
     def filters = {
         loginCheck(controller: '*', action: '*', uriExclude: '/assets/**') {
             before = {
-                if (!session.user && 
-                    (controllerName && !controllerName.equals('login'))) {
-                    if (!controllerName.equals('oauth')) {
+                if (!session.user && (controllerName && !controllerName.equals('login'))) {
+                    if (!controllerName.equals('login') && !controllerName.equals('oauth')) {
                         redirect(controller: 'login', action: 'index')
                         return false
                     }

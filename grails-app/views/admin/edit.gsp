@@ -20,15 +20,20 @@
             <g:set var="url4" value="${createLink(controller:'admin',action:'newTeam')}"/>
             <g:set var="title4" value="Crea Nuova Squadra"/>
             <input type="button" value="Crea Squadra" onclick="openDialog('${url4}','${title4}','${form}')" />
-            <g:set var="url5" value="${createLink(controller:'admin',action:'newSession')}"/>
+            <g:set var="url5" value="${createLink(controller:'admin',action:'newRound')}"/>
             <g:set var="title5" value="Crea Giornata"/>
             <input type="button" value="Crea Giornata" onclick="openDialog('${url5}','${title5}','${form}')" />
             <hr/>
-            
-            <div id="accordion">
-                <h3>Gestione Utenze</h3>
-                <div>
-                  <p>
+
+            <ul id="tabs">
+                <li><a href="#" onclick="showTab('tab1');">Utenti</a></li>
+                <li><a href="#" onclick="showTab('tab2');">Stagioni</a></li>
+                <li><a href="#" onclick="showTab('tab3');">Competizioni</a></li>
+                <li><a href="#" onclick="showTab('tab4');">Squadre</a></li>
+                <li><a href="#" onclick="showTab('tab5');">Sessioni</a></li>
+            </ul>
+            <div id="container">
+                <div class="content1" id="tab1">
                     <table>
                         <thead>
                             <th>Nome</th>
@@ -51,10 +56,8 @@
                             </tr>
                         </g:each>
                     </table>
-                  </p>
                 </div>
-                <h3>Gestione Stagioni</h3>
-                <div>
+                <div class="content" id="tab2">
                   <table>
                         <thead>
                             <th>Descrizione</th>
@@ -85,8 +88,7 @@
                         </g:else>
                     </table>
                 </div>
-                <h3>Gestione Competizioni</h3>
-                <div>
+                <div class="content" id="tab3">
                     <table>
                         <thead>
                             <th>Logo</th>
@@ -112,8 +114,7 @@
                         </g:each>
                     </table>
                 </div>
-                <h3>Gestione Squadre</h3>
-                <div>
+                <div class="content" id="tab4">
                     <table>
                         <thead>
                             <th>Logo</th>
@@ -137,9 +138,7 @@
                         </g:each>
                     </table>
                 </div>
-                <h3>Gestione Sessioni</h3>
-                <div>
-                  <p>
+                <div class="content" id="tab5">
                     <table>
                         <thead>
                             <th>Descrizione</th>
@@ -168,16 +167,14 @@
                             </tr>
                         </g:else>
                     </table>
-                  </p>
                 </div>
               </div>
             
             <script type="text/javascript">
-            $(function() {
-                $( "#accordion" ).accordion({
-                        collapsible: true
+                $(document).ready(function() {
+                    showTab('tab1');
                 });
-            });
+
             $(document).on("ajaxStop", function() {
                 $("#dialog").dialog("option", "position", ['center', 'center']);
                 $("#dialog").dialog({ position: "center" });
@@ -234,6 +231,37 @@
                 pop.dialog( "option", "title", sTitle);
 
             }
+
+                function showTab(tab) {
+                    for (var i = 1; i < 6; i++) {
+                        $('#tab' + i).hide();
+                    }
+
+                    $('#' + tab).show();
+                }
             </script>
+    <style>
+    #tabs li {
+        list-style: none;
+        float: left;
+        width: 150px;
+        height: 35px;
+        margin: 0 5px;
+    }
+    #tabs li a {
+        background-color: #dedede;
+        color: #222;
+        font-weight: bold;
+        text-decoration: none;
+        width: 150px;
+        height: 35px;
+        display: block;
+        float: left;
+        line-height: 35px;
+        text-align: center;
+    }
+    #tabs li a:hover,
+    #tabs li a:active { background-color: #ededed; }
+    </style>
 	</body>
 </html>

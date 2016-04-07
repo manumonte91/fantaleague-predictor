@@ -27,7 +27,8 @@
                  <g:getProfilePicture idUser="${session.user.id}" avatarType="avatar_tiny" />
                  <input type="hidden" name="id" value="${session.user.id}" />
 
-                 <g:textArea class="postText commento_${post.id}" name="commento" rows="1" placeholder="Scrivi un commento..." />
+                 <g:textArea class="postText commento_${post.id}" name="commento_${post.id}" rows="1" placeholder="Scrivi un commento..."
+                    onkeyup='if (event.which == 13 && !event.shiftKey && !!\$.trim(\$(this).val())) { sendComment(${post.id},${session.user.id}); }'></g:textArea>
              </p>
          </div>
     </div>

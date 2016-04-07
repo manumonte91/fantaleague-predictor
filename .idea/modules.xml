@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/fantaleague-predictor.iml" filepath="$PROJECT_DIR$/fantaleague-predictor.iml" />
       <module fileurl="file://$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" filepath="$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" filepath="$PROJECT_DIR$/fantaleague-predictor-grailsPlugins.iml" />
     </modules>
   </component>
 </project>

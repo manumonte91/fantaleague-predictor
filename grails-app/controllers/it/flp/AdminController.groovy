@@ -136,4 +136,8 @@ class AdminController {
         
         redirect action:edit
     }
+
+    def newRound = {
+        render template:'newRound'
+    }
 }

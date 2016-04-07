@@ -39,107 +39,13 @@
                     $('.postText').autosize({append:false});
                     modelFlag (${session.user.giocatore.tipoColoriSociali.id});
                 });
-                
-                function sendPost(idUser){
-                    var post = $('.post_').val();
-                    if (!!$.trim(post)){
-                        Mask.lock("#postWrap");
-                        $.ajax({
-                          type: 'POST',
-                          url: '${createLink(controller:'social',action:'newPost')}',
-                          data: {
-                            post: $('.post_').val(),
-                            idUser: idUser
-                          }
-                        }).done(function(response){
-                          $(response).hide().prependTo('.posts_').fadeIn('slow');
-                          $('.post_').val('');
-                          Mask.unlock();
-                        });
-                    } else {
-                        alert ('Inserisci un post correttamente');
-                    }
-                }
-                
-                function sendLike(idPost, idUser){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'like')}',
-                      data: {
-                        idUser: idUser,
-                        idPost: idPost
-                      }
-                    }).done(function(response){
-                      $('.likeSummary_' + idPost).html(response);
-                    });
-                }
-                
-                function sendDislike(idPost, idUser){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'dislike')}',
-                      data: {
-                        idUser: idUser,
-                        idPost: idPost
-                      }
-                    }).done(function(response){
-                      $('.likeSummary_' + idPost).html(response);
-                    });
-                }
-                
-                function displayAllComments(idPost){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'displayAllComments')}',
-                      data: {
-                        idPost: idPost
-                      }
-                    }).done(function(response){
-                      $('.post_' + idPost).html(response);
-                    });
-                }
-                
-                function sendLikeComment(idComment, idUser){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'likeComment')}',
-                      data: {
-                        idUser: idUser,
-                        idComment: idComment
-                      }
-                    }).done(function(response){
-                      $('.likeCommentSummary_' + idComment).html(response);
-                    });
-                }
-                
-                function sendDislikeComment(idComment, idUser){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'dislikeComment')}',
-                      data: {
-                        idUser: idUser,
-                        idComment: idComment
-                      }
-                    }).done(function(response){
-                      $('.likeCommentSummary_' + idComment).html(response);
-                    });
-                }
-                
-                function sendComment(idPost, idUser){
-                    $.ajax({
-                      type: 'POST',
-                      url: '${createLink(controller:'social',action:'comment')}',
-                      data: {
-                        commento: $('.commento_' + idPost).val(),
-                        idUser: idUser,
-                        idPost: idPost
-                      }
-                    }).done(function(response){
-                      $('.post_' + idPost).append(response);
-                      $('.commento_' + idPost).val('');
-                      $('.commento_' + idPost).autosize({append:false});
-                    });
-                }
+                var urlSendPost = "${createLink(controller:'social',action:'newPost')}";
+                var urlSendDisplayAllComments = "${createLink(controller:'social',action:'displayAllComments')}";
+                var urlSendLike = "${createLink(controller:'social',action:'like')}";
+                var urlSendDislike = "${createLink(controller:'social',action:'dislike')}";
+                var urlSendComment = "${createLink(controller:'social',action:'comment')}";
+                var urlSendLikeComment = "${createLink(controller:'social',action:'likeComment')}";
+                var urlSendDislikeComment = "${createLink(controller:'social',action:'dislikeComment')}";
             </g:javascript>
 	</body>
 </html>

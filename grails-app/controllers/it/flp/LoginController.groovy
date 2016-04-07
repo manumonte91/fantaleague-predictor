@@ -51,7 +51,7 @@ class LoginController {
         if (user && passwordEncoder.isPasswordValid(user.password, params.j_password, null)) {
             session.user = user
             flash.message = "Login effettuata con successo"
-            render view:'/dashboard.gsp'
+            redirect uri: '/dashboard'
         } else {
             flash.error = "Utente o Password non valida"
             render view:'index'
@@ -61,7 +61,7 @@ class LoginController {
     def logout() {
         session.invalidate()
         flash.message = "Logout effettuato con successo"
-        render view:'/index.gsp'
+        redirect uri: '/'
     }
     
     def facebookSuccess() {
@@ -118,7 +118,7 @@ class LoginController {
         
         flash.message = message
 
-        render view:'/dashboard.gsp'
+        redirect uri: '/dashboard'
     }
     
     def facebookFailure() {

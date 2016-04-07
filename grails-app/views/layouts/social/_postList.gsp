@@ -4,13 +4,13 @@
         <g:each in="${postList}" var="post" status="i">
             <g:if test="${i != 0}"><hr/></g:if>
                 <g:render template="/layouts/social/post" model="['post':post]" />
-                <g:javascript>
+                <script type="text/javascript">
                     $('.commento_${post.id}').keyup(function(e){
                         if (e.which == 13 && !event.shiftKey && !!$.trim($(this).val())) {
                             sendComment(${post.id},${session.user.id});
                         }
                     });
-                </g:javascript>
+                </script>
         </g:each>
     </g:if>
     </ul>

@@ -26,7 +26,7 @@ class FinderService {
 
     def postList = { params, srt, ord, offset, max ->
         //def cond = utenteCondizioni(params)
-        def result = Post.createCriteria().list() {
+        Post.createCriteria().list() {
             //and (cond)
             if (srt) {
                 order(srt, ord)
