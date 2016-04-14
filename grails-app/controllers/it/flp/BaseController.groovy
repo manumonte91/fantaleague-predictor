@@ -9,8 +9,6 @@ class BaseController {
     def finderService
     
     def index() {
-        if(!session.user)
-            redirect uri:'/'
             
         redirect controller: params.controller, 
                  action: params.action,

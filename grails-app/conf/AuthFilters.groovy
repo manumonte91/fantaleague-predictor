@@ -1,3 +1,5 @@
+import it.flp.Ruolo
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +12,8 @@
  * class to filter login auth check
  */
 class AuthFilters {
+    def springSecurityService
+
     def filters = {
         loginCheck(controller: '*', action: '*', uriExclude: '/assets/**') {
             before = {
@@ -18,6 +22,8 @@ class AuthFilters {
                         redirect(controller: 'login', action: 'index')
                         return false
                     }
+                } else if (springSecurityService.currentUser?.getAuthorities()?.find { it?.id == Ruolo.USER } && controllerName.equals('admin')) {
+                    redirect uri: '/dashboard'
                 }
             }
         }
